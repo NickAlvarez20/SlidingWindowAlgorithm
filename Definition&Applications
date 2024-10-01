@@ -1,0 +1,69 @@
+1. Problem will explicity or implicity define a subarray and make it a valid problem solving method. 
+
+- A constraint metric, Imagine you're playing with building blocks, and you have a rule that says you can only use the red blocks to build a tower. So, if you're trying to build something or solve a puzzle, this method helps you by telling you what you can't do or what you must use, making the game a bit easier or more organized.
+
+- A numeric restriction on the constraint method, this should help determine what makes the subarray valid.
+
+For example, the problem states the subarray is valid if it has a sum less than or equal to 10.
+-The constraint metric here is the sum of the subarray
+-The numeric restriction is less than or equal to 10. 
+
+2. The problem will ask you to find valid subarrays in some way. 
+-Most common task is finding the *best* valid subarray. The problem will define what makes this subarray better than another. For example, the problem might ask to find the longest subarray. 
+-Another common task is finding the number of valid subarrays. 
+
+If a problem talks about subarrays, determine if sliding window is a good approach. If you find these things mentioned in the list above, then you should utilize a sliding window approach to solve.
+
+Understanding the sliding window:
+
+1. Two variables, left and right, which at any time represent the current subarray.
+2. Setting to 0 means the first subarray is currently the first element on its own, now to expand the size of the window, we increment right. Right adds a new element to the window.
+
+If the subarray is beyond the numeric restriction, then we need to "remove" elements from the window until it becomes valid again. To remove, simply increment left which shrinks the window. As we add and remove, we are "sliding" the window along the input from left to right. The window is constantly changing, it grow as large as it can until it's invalid, and then it shrinks.
+
+3. It always slides right until the end of the input.
+
+4. To implement we need to create a variable that keeps track of the current sum. 
+-When we add a new element from the right, simply increment the variable with += nums[right]
+-When we remove an element, simply decrement the current sum variable -= nums[left]
+
+Since this is a variation of the two pointers, how do we move the pointers? 
+-Key point is to keep expanding the window, and the window always slides right. It just might shrink a few times in between, "to maintain the numeric constraint"
+-When we move left, we are shrinking the window. By keeping a currentSum variable and making sure it updates as each part of the logic is done, we can check the condition, if currentSum <= k(numeric constraint)
+
+5. To implement the conditional check, we need a while loop and the condition | while (currentSum > k) "while the window is invalid" then perform this logic that will shrink the window
+-To perform the removals, we do currentSum -= nums[left]
+-Then increment left in each iteration of the while loop
+
+How do we update the answer? 
+Make sure you add answer at the beginning of the problem with a 0 initialization. 
+-answer = 0;
+
+Here's psuedocode for reference:
+function fn(nums, k):
+    left = 0
+    curr = 0
+    answer = 0
+    for (int right = 0; right < nums.length; right++):
+        curr += nums[right]
+        while (curr > k):
+            curr -= nums[left]
+            left++
+
+        answer = max(answer, right - left + 1)
+
+    return answer
+
+Minimized Format for General Template:
+function fn(arr):
+    left = 0
+    for (int right = 0; right < arr.length; right++):
+        Do some logic to "add" element at arr[right] to window
+
+        while WINDOW_IS_INVALID:
+            Do some logic to "remove" element at arr[left] from window
+            left++
+
+        Do some logic to update the answer
+
+The time complexity of this algorithm is O(n) which means it scales linearly win the size of the array. This efficiency comes from the sliding window technique where we traverse the array only once with the right pointer. Although there's an inner while loop to adjust the left pointer when necessary, each element enters and leaves out window at most once, ensuring that we do not perform redundant computations. Instead of explicity creating and analyzing each subarray, we manage the sum(currentSum) dynamically, which allows us to analyze all valid subarrays in one pass through the data, thus achieving O(n) time complexity, which is linear time complexity, whic receives a fair rating. 
