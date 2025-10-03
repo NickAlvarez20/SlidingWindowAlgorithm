@@ -31,7 +31,7 @@ This SlidingWindowAlgorithm project includes these features:
 
 ## Getting Started & Installation
 Clone the repository to your local machine:
-`git clone https://github.com/NickAlvarez20/insertrepositoryNameHere.git](https://github.com/NickAlvarez20/SlidingWindowAlgorithm.git`
+`git clone https://github.com/NickAlvarez20/SlidingWindowAlgorithm.git`
 
 ## Usage
 Run the Python script (sliding_window.py) from the command line:
