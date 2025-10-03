@@ -39,7 +39,7 @@ Run the Python script (sliding_window.py) from the command line:
 ## Learning Outcomes
 This project helped me:
 
--Master the Sliding Window Algorithm for solving array and string problems
+-Learn how to implement the Sliding Window Algorithm for solving array and string problems
 
 -Understand how to maintain a valid window using two pointers and dynamic updates
 
